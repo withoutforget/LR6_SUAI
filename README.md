@@ -80,3 +80,50 @@ git config user.email "idcfyoy@gmail.com"
 остались в истории.
 
 ![Откат коммита](shots/06-otkat.png)
+
+## 6. Лог команд
+
+Команды приведены без результатов выполнения, в том
+порядке, в котором применялись.
+
+```
+git clone git@github.com:withoutforget/LR6_SUAI.git
+cd LR6_SUAI
+git config user.name "4517 Тугушев Р.Д."
+git config user.email "idcfyoy@gmail.com"
+git config --local --get user.name
+git config --local --get user.email
+git remote -v
+git log --oneline -n 4
+
+git checkout -b branch1 origin/branch1
+git checkout master
+git branch -a
+git log --oneline --graph --all
+git log --oneline branch1
+git show --stat HEAD
+
+git merge branch1
+git status --short
+cat mergefile.txt
+git add mergefile.txt
+git commit -m "Слияние branch1 в master: конфликт разрешён вручную"
+git branch -d branch1
+git log --oneline --graph -n 5
+
+git add notes.txt
+git commit -m "Добавлен файл заметок по работе"
+git commit -am "Заметки: описано слияние веток"
+git commit -am "Ошибочная правка для демонстрации отката"
+git log --oneline -n 4
+git revert --no-edit HEAD
+
+git checkout -b report
+git add README.md shots
+git commit -m "Отчёт: цель работы, настройка клиента, история веток"
+git commit -m "Отчёт: слияние с конфликтом, удаление ветки, откат коммита"
+git commit -m "Отчёт: лог использованных команд"
+git log --pretty=format:"%h %ad %an %s" --date=short
+git push origin master
+git push origin report
+```
